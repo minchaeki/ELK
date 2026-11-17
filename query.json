@@ -1,0 +1,12 @@
+{
+  "size": 0,
+  "query": { "bool": { "must_not": [ { "term": { "attack_type.keyword": "normal" } } ] } },
+  "aggs": {
+    "attacker_ips": {
+      "terms": { "field": "src_ip.keyword", "min_doc_count": 5 },
+      "aggs": {
+        "attack_types": { "terms": { "field": "attack_type.keyword" } }
+      }
+    }
+  }
+}
